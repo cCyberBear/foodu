@@ -4,7 +4,7 @@ import React from "react";
 const CategoryCard = ({ imgUrl, title }) => {
   return (
     <TouchableOpacity className="relative mr-2 h-20 w-60 rounded bg-teal-200 items-center justify-center">
-      <Text className=" text-black font-bold ">{title}</Text>
+      <Text className=" text-white font-bold text-lg">{title}</Text>
     </TouchableOpacity>
   );
 };

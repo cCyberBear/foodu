@@ -5,6 +5,7 @@ import {
   View,
   TextInput,
   ScrollView,
+  SafeAreaView,
 } from "react-native";
 import React, { useEffect, useLayoutEffect, useState } from "react";
 import { useNavigation } from "@react-navigation/native";
@@ -20,10 +21,15 @@ import FeatureRow from "../components/FeatureRow";
 import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
 import { getAllCatetgoryAction } from "../store/actions/categoryAction";
+import {
+  getAllProductAction,
+  getTopProductAction,
+} from "../store/actions/productAction";
 const HomeScreen = () => {
   const navigation = useNavigation();
   const dispatch = useDispatch();
-
+  const topProduct = useSelector((state) => state.productReducer?.topProducts);
+  const allProduct = useSelector((state) => state.productReducer?.listProducts);
   useLayoutEffect(() => {
     navigation.setOptions({
       headerShown: false,
@@ -32,9 +38,11 @@ const HomeScreen = () => {
 
   useEffect(() => {
     dispatch(getAllCatetgoryAction());
+    dispatch(getTopProductAction());
+    dispatch(getAllProductAction());
   }, []);
   return (
-    <SafeAndroiView>
+    <SafeAreaView>
       {/* header */}
       <View className="flex-row pb-3 items-center mx-4 space-x-4">
         <Image
@@ -61,28 +69,23 @@ const HomeScreen = () => {
         <AdjustmentsIcon size={20} color="#00CCBB" />
       </View>
       {/* body */}
-      <ScrollView className="bg-gray-100">
+      <ScrollView className="bg-gray-100 mb-20">
         <Category />
         <FeatureRow
           id="1"
-          title="Feature"
-          description="Paid placements from our partners"
-          featuredCategory="featured"
+          title="Top Product"
+          description="Best seller !!!!"
+          products={topProduct ? topProduct : []}
         />
         <FeatureRow
           id="2"
-          title="Tasty Discounts"
-          description="Everyone's been enjoying these juicy discounts"
+          title="All Products"
+          description="Everthing in our store"
           featuredCategory="discounts"
-        />
-        <FeatureRow
-          id="3"
-          title="Offers near you"
-          description="Why not support your local restaurant tonight!"
-          featuredCategory="offers"
+          products={allProduct ? allProduct : []}
         />
       </ScrollView>
-    </SafeAndroiView>
+    </SafeAreaView>
   );
 };
 

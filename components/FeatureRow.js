@@ -2,10 +2,9 @@ import { View, Text, ScrollView } from "react-native";
 import React, { useEffect, useState } from "react";
 import { ArrowRightIcon } from "react-native-heroicons/outline";
 import RestaurantCart from "./RestaurantCart";
+import { IMG_URL } from "../utils/constants";
 
-const FeatureRow = ({ is, title, description, featuredCategory }) => {
-  const [food, setFood] = useState([]);
-
+const FeatureRow = ({ is, title, description, products }) => {
   return (
     <View>
       <View className="flex-row items-center justify-between mt-4 px-4">
@@ -19,22 +18,18 @@ const FeatureRow = ({ is, title, description, featuredCategory }) => {
           paddingHorizontal: 15,
         }}
         showsHorizontalScrollIndicator={false}
-        className="pt-4"
-      >
-        {food.map((val) => (
-          <RestaurantCart
-            id={val.id}
-            imgUrl={val.img}
-            title={val.name}
-            rating={val.quantity}
-            genre="Japanese"
-            address="123 Main street"
-            short_des="this is short description"
-            dishes={[]}
-            long={20}
-            lat={0}
-          />
-        ))}
+        className="pt-4">
+        {products &&
+          products.map((val) => (
+            <RestaurantCart
+              key={val._id}
+              id={val._id}
+              imgUrl={IMG_URL + val.img}
+              title={val.name}
+              price={val.retailPrice}
+              quantity={val.quantity}
+            />
+          ))}
       </ScrollView>
     </View>
   );
