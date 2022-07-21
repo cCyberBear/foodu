@@ -13,6 +13,9 @@ export class ProducyService extends baseService {
   //   deteleCategory = (id) => {
   //     return this.delete(`/api/category/${id}`);
   //   };
+  getProductById = (id) => {
+    return this.get(`/product/${id}`);
+  };
   getAllProduct = () => {
     return this.get(`/product/all-product`);
   };

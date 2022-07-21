@@ -1,18 +1,23 @@
 import { View, Text, TouchableOpacity, Image } from "react-native";
 import React from "react";
 import { CurrencyDollarIcon, DatabaseIcon } from "react-native-heroicons/solid";
+import { useNavigation } from "@react-navigation/native";
+import ProductDetailScreen from "../screens/ProductDetailScreen";
+import { CURRENT_ID } from "../store/types/ProductTypes";
+import { useDispatch } from "react-redux";
+import { getProductById } from "../store/actions/productAction";
 
-const RestaurantCart = ({
-  id,
-  imgUrl,
-  title,
-  price,
-  genre,
-  address,
-  quantity,
-}) => {
+const RestaurantCart = ({ id, imgUrl, title, price, genre, quantity }) => {
+  const navigation = useNavigation();
+  const dispatch = useDispatch();
+  const handlePressViewDetail = () => {
+    dispatch(getProductById(id));
+    navigation.navigate("ProductsDetail");
+  };
   return (
-    <TouchableOpacity className="mr-4 bg-white shadow overflow-hidden items-center">
+    <TouchableOpacity
+      onPress={handlePressViewDetail}
+      className="mr-4 bg-white shadow overflow-hidden items-center">
       <Image
         source={{
           uri: imgUrl,

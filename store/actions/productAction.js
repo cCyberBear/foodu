@@ -1,5 +1,10 @@
 import { producyService } from "../../services/ProductService";
-import { GET_ALL_PRODUCT, GET_TOP_PRODUCT } from "../types/ProductTypes";
+import {
+  CURRENT_ID,
+  GET_ALL_PRODUCT,
+  GET_TOP_PRODUCT,
+  PRODUCT_BY_ID,
+} from "../types/ProductTypes";
 
 const getTopProductAction = () => async (dispatch) => {
   try {
@@ -17,4 +22,13 @@ const getAllProductAction = () => async (dispatch) => {
     console.log(error.response?.data);
   }
 };
-export { getTopProductAction, getAllProductAction };
+
+const getProductById = (id) => async (dispatch) => {
+  try {
+    const { data } = await producyService.getProductById(id);
+    dispatch({ type: PRODUCT_BY_ID, payload: data.data });
+  } catch (error) {
+    console.log(error.response?.data);
+  }
+};
+export { getTopProductAction, getAllProductAction, getProductById };
