@@ -6,6 +6,7 @@ import { Provider } from "react-redux";
 import store from "./store/store";
 import HomeScreen from "./screens/HomeScreen";
 import ProductDetailScreen from "./screens/ProductDetailScreen";
+import ViewAllScreen from "./screens/ViewAllScreen";
 
 const Stack = createNativeStackNavigator();
 export default function App() {
@@ -19,6 +20,7 @@ export default function App() {
               name="ProductsDetail"
               component={ProductDetailScreen}
             />
+            <Stack.Screen name="ViewAll" component={ViewAllScreen} />
           </Stack.Navigator>
         </TailwindProvider>
       </Provider>

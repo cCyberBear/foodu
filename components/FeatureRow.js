@@ -1,15 +1,29 @@
-import { View, Text, ScrollView } from "react-native";
+import { View, Text, ScrollView, TouchableOpacity } from "react-native";
 import React, { useEffect, useState } from "react";
 import { ArrowRightIcon } from "react-native-heroicons/outline";
 import RestaurantCart from "./RestaurantCart";
 import { IMG_URL } from "../utils/constants";
+import { PRODUCT_VIEW } from "../store/types/ProductTypes";
+import { useDispatch } from "react-redux";
+import { useNavigation } from "@react-navigation/native";
 
-const FeatureRow = ({ is, title, description, products }) => {
+const FeatureRow = ({ id, title, description, products }) => {
+  const navigation = useNavigation();
+  const dispatch = useDispatch();
+  const handleViewAll = () => {
+    dispatch({ type: PRODUCT_VIEW, payload: id });
+    navigation.navigate("ViewAll");
+  };
   return (
     <View>
       <View className="flex-row items-center justify-between mt-4 px-4">
         <Text className="text-lg font-bold">{title}</Text>
-        <ArrowRightIcon color="#00CCBB" />
+        <TouchableOpacity
+          className="bg-white rounded-full p-2"
+          onPress={handleViewAll}
+        >
+          <ArrowRightIcon color="#00CCBB" />
+        </TouchableOpacity>
       </View>
       <Text className="text-xs px-4 text-gray-500">{description}</Text>
       <ScrollView
@@ -18,7 +32,8 @@ const FeatureRow = ({ is, title, description, products }) => {
           paddingHorizontal: 15,
         }}
         showsHorizontalScrollIndicator={false}
-        className="pt-4">
+        className="pt-4"
+      >
         {products &&
           products.map((val) => (
             <RestaurantCart

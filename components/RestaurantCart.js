@@ -6,6 +6,7 @@ import ProductDetailScreen from "../screens/ProductDetailScreen";
 import { CURRENT_ID } from "../store/types/ProductTypes";
 import { useDispatch } from "react-redux";
 import { getProductById } from "../store/actions/productAction";
+import CurrencyFormat from "react-currency-format";
 
 const RestaurantCart = ({ id, imgUrl, title, price, genre, quantity }) => {
   const navigation = useNavigation();
@@ -17,7 +18,8 @@ const RestaurantCart = ({ id, imgUrl, title, price, genre, quantity }) => {
   return (
     <TouchableOpacity
       onPress={handlePressViewDetail}
-      className="mr-4 bg-white shadow overflow-hidden items-center">
+      className="mr-4 bg-white shadow overflow-hidden items-center"
+    >
       <Image
         source={{
           uri: imgUrl,
@@ -30,7 +32,14 @@ const RestaurantCart = ({ id, imgUrl, title, price, genre, quantity }) => {
           <View className="flex-row items-center space-x-1">
             <CurrencyDollarIcon color="green" opacity={0.5} size={22} />
             <Text className="text-xs text-gray-500">
-              <Text className="text-green-700">{price}.00</Text>
+              <CurrencyFormat
+                value={price}
+                displayType={"text"}
+                thousandSeparator={true}
+                renderText={(value) => (
+                  <Text className="text-green-700">{value}.00</Text>
+                )}
+              />
               {genre}
             </Text>
           </View>
