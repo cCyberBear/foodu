@@ -7,6 +7,7 @@ import store from "./store/store";
 import HomeScreen from "./screens/HomeScreen";
 import ProductDetailScreen from "./screens/ProductDetailScreen";
 import ViewAllScreen from "./screens/ViewAllScreen";
+import ViewCartScreen from "./screens/ViewCartScreen";
 
 const Stack = createNativeStackNavigator();
 export default function App() {
@@ -21,6 +22,7 @@ export default function App() {
               component={ProductDetailScreen}
             />
             <Stack.Screen name="ViewAll" component={ViewAllScreen} />
+            <Stack.Screen name="ViewCart" component={ViewCartScreen} />
           </Stack.Navigator>
         </TailwindProvider>
       </Provider>

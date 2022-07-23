@@ -1,13 +1,13 @@
 import { View, Text, Image, TouchableOpacity, ScrollView } from "react-native";
-import React, { useEffect, useLayoutEffect } from "react";
+import React, { useLayoutEffect } from "react";
 import { useNavigation } from "@react-navigation/native";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { IMG_URL } from "../utils/constants";
 import {
   CurrencyDollarIcon,
   PlusCircleIcon,
   ShoppingCartIcon,
-} from "react-native-heroicons/solid";
+} from "react-native-heroicons/outline";
 import CurrencyFormat from "react-currency-format";
 import FeaturedButton from "../components/FeaturedButton";
 const ProductDetailScreen = () => {
@@ -15,15 +15,26 @@ const ProductDetailScreen = () => {
   const currentProduct = useSelector(
     (state) => state.productReducer.currentProduct
   );
+  const cart = useSelector((state) => state.productReducer.cart);
   useLayoutEffect(() => {
     navigation.setOptions({
       headerShown: false,
     });
   }, []);
+  const handleOpenCart = () => {
+    navigation.navigate("ViewCart");
+  };
   return (
     <>
+      <TouchableOpacity
+        onPress={handleOpenCart}
+        className="absolute z-50 top-10 right-4 bg-teal-300 px-4 py-2 rounded-2xl flex-row items-center"
+      >
+        <ShoppingCartIcon size={22} color={"#fff"} />
+        <Text className="text-white font-bold text-lg"> {cart.length}</Text>
+      </TouchableOpacity>
       <FeaturedButton />
-      <ScrollView className="relative">
+      <ScrollView>
         <Image
           source={{
             uri: IMG_URL + currentProduct.img,

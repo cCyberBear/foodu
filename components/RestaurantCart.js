@@ -2,8 +2,6 @@ import { View, Text, TouchableOpacity, Image } from "react-native";
 import React from "react";
 import { CurrencyDollarIcon, DatabaseIcon } from "react-native-heroicons/solid";
 import { useNavigation } from "@react-navigation/native";
-import ProductDetailScreen from "../screens/ProductDetailScreen";
-import { CURRENT_ID } from "../store/types/ProductTypes";
 import { useDispatch } from "react-redux";
 import { getProductById } from "../store/actions/productAction";
 import CurrencyFormat from "react-currency-format";

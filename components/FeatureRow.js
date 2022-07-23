@@ -1,5 +1,5 @@
 import { View, Text, ScrollView, TouchableOpacity } from "react-native";
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { ArrowRightIcon } from "react-native-heroicons/outline";
 import RestaurantCart from "./RestaurantCart";
 import { IMG_URL } from "../utils/constants";
