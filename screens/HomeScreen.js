@@ -5,6 +5,7 @@ import {
   View,
   TextInput,
   ScrollView,
+  SafeAreaView,
 } from "react-native";
 import React, { useEffect, useLayoutEffect, useState } from "react";
 import { useNavigation } from "@react-navigation/native";
@@ -40,7 +41,7 @@ const HomeScreen = () => {
     dispatch(getAllProductAction());
   }, []);
   return (
-    <SafeAndroiView>
+    <SafeAreaView>
       <View className="flex-1 mb-50">
         {/* header */}
         <View className="flex-row pb-3 items-center mx-4 space-x-4">
@@ -85,7 +86,7 @@ const HomeScreen = () => {
           />
         </ScrollView>
       </View>
-    </SafeAndroiView>
+    </SafeAreaView>
   );
 };
 
